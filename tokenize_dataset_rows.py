@@ -16,7 +16,9 @@ def preprocess(tokenizer, config, example, max_seq_length, version):
             max_length=max_seq_length,
             truncation=True,
             add_special_tokens=False)
-        input_ids = prompt_ids + target_ids + [config.eos_token_id]
+        #input_ids = prompt_ids + target_ids + [config.eos_token_id]
+        input_ids = tokenizer.build_inputs_with_special_tokens(prompt_ids, target_ids)
+
         return {"input_ids": input_ids, "seq_len": len(prompt_ids)}
 
     if version == 'v2':
